@@ -1,31 +1,27 @@
-import { View, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import * as SecureStore from 'expo-secure-store';
-import { Redirect } from 'expo-router';
-const index = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [loading, setLoading] = useState(false);
+import React, { useEffect, useState } from "react";
+import * as SecureStore from "expo-secure-store";
+import { Redirect } from "expo-router";
 
-    useEffect(
-         () =>{
+export default function index() {
+  const [loggedInUser, setloggedInUser] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-            const checkLogin = async() =>{
-                setLoading(true)
-                const token = SecureStore.getItem('accessToken')
-                if(token){
-                    setLoggedIn(true)
-                }
-                setLoading(false)
-            }
-            checkLogin()
-    }, [])
+  useEffect(() => {
+    const subscription = async () => {
+      const token = SecureStore.getItem("accessToken");
+      setloggedInUser(token ? true : false);
+      setLoading(false);
+    };
+    subscription();
+  }, []);
+
   return (
     <>
-      {
-        loading ? <></> : <Redirect href={!loggedIn ? '/(routes)/onboarding' : '/(tabs)'} />
-      }
+      {loading ? (
+        <></>
+      ) : (
+        <Redirect href={!loggedInUser ? "/(routes)/onboarding" : "/(tabs)"} />
+      )}
     </>
-  )
+  );
 }
-
-export default index

@@ -7,7 +7,7 @@ import One from '@/assets/images/onboarding/1.png';
 import Two from '@/assets/images/onboarding/2.png';
 //@ts-ignore
 import Three from '@/assets/images/onboarding/3.png';
-export const onBoardingSliders: onBoardingSlidersType[] = [
+export const onBoardingSlides: onBoardingSlidersType[] = [
     {
         color: '#40E0D0',
         title: 'Explore',
@@ -44,7 +44,16 @@ export const onBoardingSliders: onBoardingSlidersType[] = [
 ]
 
 
+
+
 // onboarding variables
+
+export enum Side {
+    LEFT,
+    RIGHT,
+    NONE
+}
+
 export const MIN_LEDGE = 25;
 
 export const {width: WIDTH, height: HEIGHT} = Dimensions.get('screen');
