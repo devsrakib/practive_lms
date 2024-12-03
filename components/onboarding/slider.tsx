@@ -3,7 +3,7 @@ import React from 'react'
 import { useSharedValue } from 'react-native-reanimated';
 import { Side } from './wave';
 import {snapPoint, useVector } from 'react-native-redash';
-import { HEIGHT, MARGIN_WIDTH, MIN_LEDGE } from '@/configs/constants';
+import { HEIGHT, MARGIN_WIDTH, MIN_LEDGE, WIDTH } from '@/configs/constants';
 import { Gesture } from 'react-native-gesture-handler';
 
 interface SliderProps {
@@ -27,6 +27,10 @@ const Slider = ({index, setIndex, prev, next,children}:SliderProps) => {
     if(x <= MARGIN_WIDTH && hasPrev){
 activeSide.value = Side.LEFT;
 zIndex.value = 100;
+    }else if(x >= WIDTH - MARGIN_WIDTH && hasNext){
+        activeSide.value = Side.RIGHT;
+    }else{
+        activeSide.value = Side.NONE;
     }
  })
   return (
